@@ -1,0 +1,684 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swagger Tutorial",
+    "description": "**Tutorial** de `Swagger` para *documentación* de API escrita con JavaScript, para más información visite la *documentación* de [**swagger.io**](https://swagger.io/)",
+    "termsOfService": "https://swagger.io/docs/specification/about/",
+    "contact": {
+      "name": "emenpe",
+      "url": "https://swagger.io/docs/specification/about/",
+      "email": "emenpe@emenpe.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Más información sobre Swagger",
+    "url": "https://swagger.io/docs/specification/about/"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "endPoints para usuario",
+      "externalDocs": {
+        "description": "Más información",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/api/user/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Inicio de sesión",
+        "description": "Permite al usuario iniciar sesión proporcionando sus credenciales correctas.",
+        "operationId": "loginUser",
+        "requestBody": {
+          "description": "Ejemplo y Schema de usuario",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Inicio de sesión correcto",
+            "content": {
+              "application/json": {
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ8.eyJpZCI6IjYyZGVmMzk1NzMwNTI3MWVkNDM1ZTVlMCIsImVtYWlsIjoiZW1tYW51ZWxAZW1tYW51ZWwuY29tIiwiaWF0IjoxNjU4Nzc4NTE3LCJleHAiOjE2NTg3ODkzMTd9.LXVrHS_9xn9ndMmfRGgBgaWjquj8WK4mGvd0icJSTzp",
+                  "id": "62e19ae25adc345f3e7ab1a3"
+                }
+              }
+            },
+            "links": {
+              "TokenParaObtenerUsuarios": {
+                "$ref": "#/components/links/token_to_get_users"
+              },
+              "TokenParaObtenerUsuario": {
+                "$ref": "#/components/links/token_to_get_user"
+              },
+              "token_to_update_user": {
+                "$ref": "#/components/links/token_to_update_user"
+              },
+              "TokenParaEliminarUsuario": {
+                "$ref": "#/components/links/token_to_delete_user"
+              }
+            }
+          },
+          "400": {
+            "description": "Errores del usuario",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "errores": {
+                    "$ref": "#/components/examples/Errores"
+                  },
+                  "password incorrecto": {
+                    "value": {
+                      "msg": "Password incorrecto"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuario no existe",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Usuario no existe"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error del lado del servidor",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Error al iniciar sesión"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Crear usuario",
+        "description": "Permite al usuario registrarse en el sistema",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "Ejemplo y Schema de usuario",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario registrado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ8.eyJpZCI6IjYyZGVmMzk1NzMwNTI3MWVkNDM1ZTVlMCIsImVtYWlsIjoiZW1tYW51ZWxAZW1tYW51ZWwuY29tIiwiaWF0IjoxNjU4Nzc4NTE3LCJleHAiOjE2NTg3ODkzMTd9.LXVrHS_9xn9ndMmfRGgBgaWjquj8WK4mGvd0icJSTzp",
+                  "id": "62e19ae25adc345f3e7ab1a3"
+                }
+              }
+            },
+            "links": {
+              "TokenParaObtenerUsuarios": {
+                "$ref": "#/components/links/token_to_get_users"
+              },
+              "TokenParaObtenerUsuario": {
+                "$ref": "#/components/links/token_to_get_user"
+              },
+              "token_to_update_user": {
+                "$ref": "#/components/links/token_to_update_user"
+              },
+              "TokenParaEliminarUsuario": {
+                "$ref": "#/components/links/token_to_delete_user"
+              },
+              "ObtenerUsuario": {
+                "$ref": "#/components/links/id_to_get_user"
+              },
+              "ActualizarUsuario": {
+                "$ref": "#/components/links/id_to_update_user"
+              },
+              "EliminarUsiario": {
+                "$ref": "#/components/links/id_to_delete_user"
+              }
+            }
+          },
+          "400": {
+            "description": " Errores del usuario",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "Errores": {
+                    "$ref": "#/components/examples/Errores"
+                  },
+                  "email registrado": {
+                    "value": {
+                      "msg": "Email ya ha sido registrado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error del lado del servidor",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Error al registrar el usuario"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Obtener Usuarios",
+        "description": "Permite obtener todos los usuarios",
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "Usuarios obtenidos",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No autorizado",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "token_nulo": {
+                    "$ref": "#/components/examples/token_nulo"
+                  },
+                  "token_Expirado": {
+                    "$ref": "#/components/examples/token_Expirado"
+                  },
+                  "token_Malformado": {
+                    "$ref": "#/components/examples/token_Malformado"
+                  },
+                  "token_Invalido": {
+                    "$ref": "#/components/examples/token_Invalido"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error del lado del servidor",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Error al obtener los usuarios"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/user/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Obtener usuario por ID",
+        "description": "Permite obtener un usuario mediente su ID",
+        "operationId": "getUserByID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del usuario del que se quiere obtener",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Errores del usuario",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "Errores": {
+                    "$ref": "#/components/examples/Errores"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No autorizado",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "token_nulo": {
+                    "$ref": "#/components/examples/token_nulo"
+                  },
+                  "token_Expirado": {
+                    "$ref": "#/components/examples/token_Expirado"
+                  },
+                  "token_Malformado": {
+                    "$ref": "#/components/examples/token_Malformado"
+                  },
+                  "token_Invalido": {
+                    "$ref": "#/components/examples/token_Invalido"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usiario no encontrado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Usuario no encontrado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error del lado del servidor",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Error al obtener usuario"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Actualizar usuario",
+        "description": "Permite actualizar la información de un usuario",
+        "operationId": "updateUserByID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del usuario del que se quiere actualizar",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Ejemplo y schema de usuario",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario encontrado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Usuario actualizado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Errores del usuario",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "Errores": {
+                    "$ref": "#/components/examples/Errores"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No autorizado",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "token_nulo": {
+                    "$ref": "#/components/examples/token_nulo"
+                  },
+                  "token_Expirado": {
+                    "$ref": "#/components/examples/token_Expirado"
+                  },
+                  "token_Malformado": {
+                    "$ref": "#/components/examples/token_Malformado"
+                  },
+                  "token_Invalido": {
+                    "$ref": "#/components/examples/token_Invalido"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usiario no encontrado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Usuario No encontrado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error del lado del servidor",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Error al actualizar usuario"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Eliminar usuario",
+        "description": "Permite eliminar un usuario del sistema",
+        "operationId": "deleteUserByID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del usuario del que se quiere eliminar",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Usiario eliminado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Errores del usuario",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "Errores": {
+                    "$ref": "#/components/examples/Errores"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No autorizado",
+            "content": {
+              "aplication/json": {
+                "examples": {
+                  "token_nulo": {
+                    "$ref": "#/components/examples/token_nulo"
+                  },
+                  "token_Expirado": {
+                    "$ref": "#/components/examples/token_Expirado"
+                  },
+                  "token_Malformado": {
+                    "$ref": "#/components/examples/token_Malformado"
+                  },
+                  "token_Invalido": {
+                    "$ref": "#/components/examples/token_Invalido"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usiario no encontrado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Usuario no encontrado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error del lado del servidor",
+            "content": {
+              "application/json": {
+                "example": {
+                  "msg": "Error al eliminar usuario"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Descripción de este elemento del objeto"
+          },
+          "email": {
+            "type": "string",
+            "description": "Descripción de este elemento del objeto"
+          },
+          "password": {
+            "type": "string",
+            "description": "Descripción de este elemento del objeto"
+          }
+        },
+        "example": {
+          "name": "fulano",
+          "email": "fulano@fulano.com",
+          "password": "fulano12345"
+        }
+      }
+    },
+    "examples": {
+      "token_nulo": {
+        "summary": "Token_nulo",
+        "description": "Este error ocurre cuando el token no es enviado",
+        "value": {
+          "msg": "Token nulo"
+        }
+      },
+      "token_Expirado": {
+        "summary": "Token_expirado",
+        "description": "Este error ocurre cuando el token proporcionado ha expirado",
+        "value": {
+          "msg": "Token Expirado"
+        }
+      },
+      "token_Malformado": {
+        "summary": "Token_Malformado",
+        "description": "Este error ocurre cuando el token proporcionado tiene un error en su estructura",
+        "value": {
+          "msg": "Token malformado"
+        }
+      },
+      "token_Invalido": {
+        "summary": "Token_Invalido",
+        "description": "Este error ocurre cuando el token proporcionado es inválido por algunas razones en la validación",
+        "value": {
+          "msg": "Token invalido"
+        }
+      },
+      "Errores": {
+        "summary": "Lista de los errores",
+        "description": "Lista de errores que se presentan, estos errores son ocasionados por el usuario",
+        "value": [
+          {
+            "msg": "String",
+            "params": "String",
+            "location": "String"
+          }
+        ]
+      }
+    },
+    "requestBodies": {
+      "UserArray": {
+        "description": "List of user object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "links": {
+      "token_to_get_users": {
+        "operationId": "getUsers",
+        "description": "El token dado será validado antes de obtener los usuarios en ruta **GET**`/api/users`."
+      },
+      "token_to_get_user": {
+        "operationId": "getUserByID",
+        "description": "El token dado será validado antes de obtener un usuario en ruta **GET**`/api/user/{id}`."
+      },
+      "token_to_update_user": {
+        "operationId": "getUserByID",
+        "description": "El token dado será validado antes de actualizar un usuario en ruta **PUT**`/api/user/{id}`."
+      },
+      "token_to_delete_user": {
+        "operationId": "getUserByID",
+        "description": "El token dado será validado antes de eliminar un usuario en ruta **DELETE**`/api/user/{id}`."
+      },
+      "id_to_get_user": {
+        "operationId": "getUserByID",
+        "parameters": {
+          "id": "$response.body#/id"
+        },
+        "description": "El Id dado será usado para obtener un usuario en ruta **GET**`/api/user/{id}`."
+      },
+      "id_to_update_user": {
+        "operationId": "getUserByID",
+        "parameters": {
+          "id": "$response.body#/id"
+        },
+        "description": "El Id dado será usado para buscar usuario antes de actualizarlo en ruta **PUT**`/api/user/{id}`."
+      },
+      "id_to_delete_user": {
+        "operationId": "getUserByID",
+        "parameters": {
+          "id": "$response.body#/id"
+        },
+        "description": "El Id dado será usado para buscar usuario antes de eliminarlo en ruta **DELETE**`/api/user/{id}`."
+      }
+    }
+  }
+}
