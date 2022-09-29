@@ -3,6 +3,10 @@
 En este repositorio se encuentra una pequeña API que permite el CRUD de usuarios, donde la parte importante de este proyecto fue realizar una práctica
 para poder realizar la documentación de la API con [**Swagger.io**](https://swagger.io/)
 
+<p align="center">
+  <img src="./img/swagger.png" alt="Size Limit CLI" width="738">
+</p>
+
 ## Clonar repositorio
 
 1. Para clonar el repositorio y poder ejecutarlo correctamente es necesario tener instalado los siguientes programas
